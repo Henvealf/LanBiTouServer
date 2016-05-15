@@ -15,13 +15,13 @@ import java.util.Date;
  * Created by joyce on 16-5-11.
  */
 @Repository
-public class JdbcNoteRepository implements NoteRepository{
+public class NoteJdbcRepository implements NoteRepository{
 
     private static final String SELECT_NOTE_BY_ID = "select * from note where nid = ?";
     private JdbcOperations jdbcOperations;
 
     @Autowired
-    public JdbcNoteRepository(JdbcOperations jdbcOperations) {
+    public NoteJdbcRepository(JdbcOperations jdbcOperations) {
         this.jdbcOperations = jdbcOperations;
     }
 
@@ -37,10 +37,6 @@ public class JdbcNoteRepository implements NoteRepository{
                 SELECT_NOTE_BY_ID,
                 new NoteRowMapper(), id);
     }
-
-
-
-
 
     private static class NoteRowMapper implements RowMapper<Note> {
         public Note mapRow(ResultSet rs, int rowNum) throws SQLException {
