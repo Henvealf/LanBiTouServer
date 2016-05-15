@@ -1,6 +1,7 @@
 package top.glimpse.lanbitou.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 账单实体类
@@ -10,10 +11,11 @@ public class Bill implements Serializable{
 
     private int id;
     private int uid;                 //用户Id
-    private String type;              //收支类型
+    private String type;             //收支类型
     private double money;            //收或支多少钱.
-    private String folder;            //所属的文件夹
-    private String createDate;       //创建时间
+    private String folder;           //所属的文件夹
+    private String remark;           //备注
+    private Date billDate;           //账单时间,并非创建时间,由用户指定
 
 
     public int getId() {
@@ -48,12 +50,20 @@ public class Bill implements Serializable{
         this.money = money;
     }
 
-    public String getCreateDate() {
-        return createDate;
+    public void setBillDate(Date billDate) {
+        this.billDate = billDate;
     }
 
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate;
+    public Date getBillDate() {
+        return billDate;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getRemark() {
+        return remark;
     }
 
     public String getFolder() {
