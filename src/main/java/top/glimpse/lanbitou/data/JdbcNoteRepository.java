@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by joyce on 16-5-11.
@@ -18,6 +19,7 @@ import java.util.Date;
 public class JdbcNoteRepository implements NoteRepository{
 
     private static final String SELECT_NOTE_BY_ID = "select * from note where nid = ?";
+    private static final String SELECT_NOTE = "select * from note";
     private JdbcOperations jdbcOperations;
 
     @Autowired
@@ -32,14 +34,28 @@ public class JdbcNoteRepository implements NoteRepository{
     }
 
     @Override
+    public boolean updateNote(Note note) {
+        return false;
+    }
+
+    @Override
     public Note get(int id) {
         return jdbcOperations.queryForObject(
                 SELECT_NOTE_BY_ID,
                 new NoteRowMapper(), id);
     }
 
+    @Override
+    public List<Note> getAll() {
+        return jdbcOperations.query(
+                SELECT_NOTE,
+                new NoteRowMapper());
+    }
 
-
+    @Override
+    public Note postOne() {
+        return null;
+    }
 
 
     private static class NoteRowMapper implements RowMapper<Note> {
